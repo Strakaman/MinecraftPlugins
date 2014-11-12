@@ -1,0 +1,9 @@
+name: StrakaPowers
+main: omari.SuperPowers.SuperPowers
+version: 0.1
+
+commands:
+  flash:
+    description: Super speed dude.
+  shazam:
+    description: Gives you the powers of Shazam!
