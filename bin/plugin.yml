@@ -13,3 +13,5 @@ commands:
     description: Gives you the powers of Shazam!
   kazaam:
     description: Rains food.
+  debug:
+    description: Debugs stuff.

@@ -10,5 +10,7 @@ public class Debug {
 		s.sendMessage("Exhaustion: " + p.getExhaustion());
 		s.sendMessage("Saturation: " + p.getSaturation());
 		s.sendMessage("FoodLevel: " + p.getFoodLevel());
+		s.sendMessage("Fly Speed: " + p.getFlySpeed());
+		
 	}
 }

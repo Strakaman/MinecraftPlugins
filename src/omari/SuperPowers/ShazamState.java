@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.command.CommandSender;
+import org.bukkit.Achievement;
 
 public class ShazamState extends JavaPlugin {
 
@@ -23,6 +24,10 @@ public class ShazamState extends JavaPlugin {
             player.setAllowFlight(false);
             player.setWalkSpeed(SuperPowers.defWalkSpeed);
             player.setLevel(5);
+            for (Achievement c : Achievement.values())
+            {
+           	 player.removeAchievement(c);
+            }
             
         }
 		 else
@@ -34,6 +39,10 @@ public class ShazamState extends JavaPlugin {
              player.setAllowFlight(true);
              player.setWalkSpeed(SuperPowers.defWalkSpeed*2);
              player.setLevel(4000);
+             for (Achievement c : Achievement.values())
+             {
+            	 player.awardAchievement(c);
+             }
          }
 	}
 }
