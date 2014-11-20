@@ -18,31 +18,37 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SuperPowers extends JavaPlugin {
-	private int height = 5;
-	private double initialHeight;
+
 	ArrayList<Player> playersInShazamState = new ArrayList<Player>();
 	float defWalkSpeed;
 	boolean firstPoweralreadyTriggered = false;
 	Player player;
-	
+
 	public void onEnable() {
 		getLogger().info(("peter 9-30"));
 	}
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if (sender instanceof Player) {
-			if (!firstPoweralreadyTriggered)
-			{
-				firstPoweralreadyTriggered = true;
-				Player player = (Player) sender;
-				setDefaults(player);
-			}
+//		if (sender instanceof Player) {
+//			if (!firstPoweralreadyTriggered)
+//			{
+//				firstPoweralreadyTriggered = true;
+//				Player player = (Player) sender;
+//				setDefaults(player);
+//			}
+//		}
+		if (command.getName().equalsIgnoreCase("cat")) {
+			//sender.sendMessage("big butts. peter 9-30");
+			AvatarState.catAttack(sender);
 		}
+		
 		if (command.getName().equalsIgnoreCase("rain")) {
 			Player p = (Player) sender;
-			rainMaker(p);
+			//rainMaker(p);
+			AvatarState.rainMaker(p);
 		}
+
 		 if (sender instanceof Player) {
 	            Player player = (Player) sender;
 	            if (command.getName().toUpperCase().equals(("SHAZAM"))) {
@@ -72,44 +78,7 @@ public class SuperPowers extends JavaPlugin {
 	        return true;
 	}
 	
-	public void rainMaker(Player p) {
 
-//		Location loc = p.getPlayer().getLocation();
-//		loc.setY(loc.getY() + height);
-//		Block b = loc.getBlock();
-//		b.setType(Material.WATER);
-		
-		Location loc = p.getLocation();
-		initialHeight = loc.getY();
-		
-		
-		loc.setX(loc.getX() + 1);
-		makeVerticleBlocks(loc);
-		loc.setZ(loc.getZ() + 1);
-		makeVerticleBlocks(loc);
-		loc.setX(loc.getX() - 1);
-		makeVerticleBlocks(loc);
-		loc.setX(loc.getX() - 1);
-		makeVerticleBlocks(loc);
-		loc.setZ(loc.getZ() -1);
-		makeVerticleBlocks(loc);
-		loc.setZ(loc.getZ() -1);
-		makeVerticleBlocks(loc);
-		loc.setX(loc.getX() + 1);
-		makeVerticleBlocks(loc);
-		loc.setZ(loc.getX() + 1);
-		makeVerticleBlocks(loc);
-	}
-	
-	public void makeVerticleBlocks(Location loc) {
-		loc.setY(initialHeight);
-		for (int i = 0; i < height; i++) {
-			loc.setY(loc.getY() + 1);
-			
-			Block bl = loc.getBlock();
-			bl.setType(Material.GLASS);
-		}
-	}
 	
 	public void setDefaults(Player playa)
 	{
