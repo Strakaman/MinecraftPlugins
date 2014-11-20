@@ -13,7 +13,7 @@ public class ShazamState extends JavaPlugin {
 	{
 		Player player = (Player) s;
 		Location pLoc = player.getLocation();
-		player.getWorld().strikeLightning(pLoc);
+		player.getWorld().strikeLightningEffect(pLoc);
 		player.getWorld().createExplosion(pLoc.getX(), pLoc.getY(), pLoc.getZ(), 0.0f,false,false);
 		if (playersInShazamState.contains(player))
         {
@@ -22,15 +22,24 @@ public class ShazamState extends JavaPlugin {
             playersInShazamState.remove(player);
             player.setAllowFlight(false);
             player.setWalkSpeed(SuperPowers.defWalkSpeed);
+            for (int i=1; i < 20; i++)
+            {
+            	player.setExp(-i);
+            }
+            
         }
 		 else
          {
              //giveShazam powers
-             SuperPowers.defWalkSpeed = player.getWalkSpeed();
+             //SuperPowers.defWalkSpeed = player.getWalkSpeed();
              playersInShazamState.add(player);
              s.sendMessage(player.getName() + " called upon the powers of Shazam");
              player.setAllowFlight(true);
              player.setWalkSpeed(SuperPowers.defWalkSpeed*2);
+             for (int i=1; i < 20; i++)
+             {
+             	player.setExp(i);
+             }
          }
 	}
 }
