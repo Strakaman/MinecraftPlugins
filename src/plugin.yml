@@ -5,9 +5,11 @@ version: 0.1
 commands:
   cat:
     description: butts
-  rain:
+  glass:
     description: butts
   flash:
     description: Super speed dude.
   shazam:
     description: Gives you the powers of Shazam!
+  kazaam:
+  	description: Rains food.

@@ -43,12 +43,23 @@ public class SuperPowers extends JavaPlugin {
 			AvatarState.catAttack(sender);
 		}
 		
-		if (command.getName().equalsIgnoreCase("rain")) {
+		if (command.getName().equalsIgnoreCase("glass")) {
 			Player p = (Player) sender;
 			//rainMaker(p);
 			AvatarState.rainMaker(p);
 		}
-
+		
+		if (command.getName().equalsIgnoreCase("flash")) {
+			Player p = (Player) sender;
+			//rainMaker(p);
+			FlashState.flashPoint(p);
+		}
+		if (command.getName().equalsIgnoreCase("kazaam")) {
+			Player p = (Player) sender;
+			//rainMaker(p);
+			Kazaam.rainFood(p);
+		}
+		
 		 if (sender instanceof Player) {
 	            Player player = (Player) sender;
 	            if (command.getName().toUpperCase().equals(("SHAZAM"))) {
