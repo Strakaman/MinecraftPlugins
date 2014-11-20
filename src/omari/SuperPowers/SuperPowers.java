@@ -20,7 +20,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class SuperPowers extends JavaPlugin {
 
 	ArrayList<Player> playersInShazamState = new ArrayList<Player>();
-	float defWalkSpeed;
+	static float defWalkSpeed;
 	boolean firstPoweralreadyTriggered = false;
 	Player player;
 
@@ -38,6 +38,8 @@ public class SuperPowers extends JavaPlugin {
 //				setDefaults(player);
 //			}
 //		}
+		
+		 if (sender instanceof Player) {
 		if (command.getName().equalsIgnoreCase("cat")) {
 			//sender.sendMessage("big butts. peter 9-30");
 			AvatarState.catAttack(sender);
@@ -58,34 +60,11 @@ public class SuperPowers extends JavaPlugin {
 			Player p = (Player) sender;
 			//rainMaker(p);
 			Kazaam.rainFood(p);
-		}
-		
-		 if (sender instanceof Player) {
-	            Player player = (Player) sender;
-	            if (command.getName().toUpperCase().equals(("SHAZAM"))) {
-	                player.getWorld().strikeLightning(player.getLocation());
-	                player.getWorld().createExplosion(player.getLocation(), 0);
-	                if (playersInShazamState.contains(player))
-	                {
-	                    //undo Shazaming
-	                    sender.sendMessage(player.getName() + " has released the powers of Shazam");
-	                    playersInShazamState.remove(player);
-	                    player.setAllowFlight(false);
-	                    player.setWalkSpeed(defWalkSpeed);
-	                    return true;
-	                }
-	                else
-	                {
-	                    //giveShazam powers
-	                    defWalkSpeed = player.getWalkSpeed();
-	                    playersInShazamState.add(player);
-	                    sender.sendMessage(player.getName() + " called upon the powers of Shazam");
-	                    player.setAllowFlight(true);
-	                    player.setWalkSpeed(defWalkSpeed*2);
-	                    return true;
-	                }
+		}	  
+		if (command.getName().equalsIgnoreCase("shazam")) {
+			ShazamState.Shazam(sender);
+		}	
 	            }
-	        }
 	        return true;
 	}
 	
