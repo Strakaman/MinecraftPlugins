@@ -1,4 +1,4 @@
-package com.peteranpham.bukkitone;
+package omari.SuperPowers;
 
 import java.util.ArrayList;
 
@@ -31,8 +31,13 @@ public class SuperPowers extends JavaPlugin {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if (command.getName().equalsIgnoreCase("cat")) {
-			sender.sendMessage("butts. peter 9-30");
+		if (sender instanceof Player) {
+			if (!firstPoweralreadyTriggered)
+			{
+				firstPoweralreadyTriggered = true;
+				Player player = (Player) sender;
+				setDefaults(player);
+			}
 		}
 		if (command.getName().equalsIgnoreCase("rain")) {
 			Player p = (Player) sender;
@@ -105,13 +110,13 @@ public class SuperPowers extends JavaPlugin {
 			bl.setType(Material.GLASS);
 		}
 	}
-//	
-//	public void setDefaults(Player playa)
-//	{
-//		defWalkSpeed = playa.getWalkSpeed();
-//		
-//	}
-//	
+	
+	public void setDefaults(Player playa)
+	{
+		defWalkSpeed = playa.getWalkSpeed();
+		
+	}
+	
 //	public void turnAllPowersOff()
 //	{
 //		Flash(false);

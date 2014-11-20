@@ -3,6 +3,10 @@ main: omari.SuperPowers.SuperPowers
 version: 0.1
 
 commands:
+  cat:
+    description: butts
+  rain:
+    description: butts
   flash:
     description: Super speed dude.
   shazam:
