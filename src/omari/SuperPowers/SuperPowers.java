@@ -19,8 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class SuperPowers extends JavaPlugin {
 
-	ArrayList<Player> playersInShazamState = new ArrayList<Player>();
-	static float defWalkSpeed;
+	static float defWalkSpeed = 0.2f;
 	boolean firstPoweralreadyTriggered = false;
 	Player player;
 
@@ -30,15 +29,6 @@ public class SuperPowers extends JavaPlugin {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-//		if (sender instanceof Player) {
-//			if (!firstPoweralreadyTriggered)
-//			{
-//				firstPoweralreadyTriggered = true;
-//				Player player = (Player) sender;
-//				setDefaults(player);
-//			}
-//		}
-		
 		 if (sender instanceof Player) {
 		if (command.getName().equalsIgnoreCase("cat")) {
 			//sender.sendMessage("big butts. peter 9-30");
@@ -54,7 +44,8 @@ public class SuperPowers extends JavaPlugin {
 		if (command.getName().equalsIgnoreCase("flash")) {
 			Player p = (Player) sender;
 			//rainMaker(p);
-			FlashState.flashPoint(p);
+			//sender.sendMessage("walk speed:" + p.getWalkSpeed());
+			FlashState.flashPoint(p, true);
 		}
 		if (command.getName().equalsIgnoreCase("kazaam")) {
 			Player p = (Player) sender;
@@ -64,7 +55,8 @@ public class SuperPowers extends JavaPlugin {
 		if (command.getName().equalsIgnoreCase("shazam")) {
 			ShazamState.Shazam(sender);
 		}	
-	            }
+		
+	    }
 	        return true;
 	}
 	
@@ -72,7 +64,7 @@ public class SuperPowers extends JavaPlugin {
 	
 	public void setDefaults(Player playa)
 	{
-		defWalkSpeed = playa.getWalkSpeed();
+		
 		
 	}
 	
@@ -101,17 +93,6 @@ public class SuperPowers extends JavaPlugin {
 //		}
 //	}
 //	
-//	public void Flash(boolean turnOn)
-//	{
-//		if (turnOn)
-//		{
-//			player.setWalkSpeed(defWalkSpeed*4);
-//		}
-//		else
-//		{
-//			player.setWalkSpeed(defWalkSpeed);
-//		}
-//	}
 
 
 }
