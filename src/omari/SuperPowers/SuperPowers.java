@@ -1,7 +1,5 @@
 package omari.SuperPowers;
 
-import java.util.ArrayList;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -55,6 +53,10 @@ public class SuperPowers extends JavaPlugin {
 		if (command.getName().equalsIgnoreCase("shazam")) {
 			ShazamState.Shazam(sender);
 		}	
+		
+		if (command.getName().equalsIgnoreCase("debug")) {
+			Debug.debugStuff(sender);
+		}
 		
 	    }
 	        return true;

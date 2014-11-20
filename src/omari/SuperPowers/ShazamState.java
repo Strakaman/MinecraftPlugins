@@ -22,10 +22,7 @@ public class ShazamState extends JavaPlugin {
             playersInShazamState.remove(player);
             player.setAllowFlight(false);
             player.setWalkSpeed(SuperPowers.defWalkSpeed);
-            for (int i=1; i < 20; i++)
-            {
-            	player.setExp(-i);
-            }
+            player.setLevel(5);
             
         }
 		 else
@@ -36,10 +33,7 @@ public class ShazamState extends JavaPlugin {
              s.sendMessage(player.getName() + " called upon the powers of Shazam");
              player.setAllowFlight(true);
              player.setWalkSpeed(SuperPowers.defWalkSpeed*2);
-             for (int i=1; i < 20; i++)
-             {
-             	player.setExp(i);
-             }
+             player.setLevel(4000);
          }
 	}
 }
