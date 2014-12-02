@@ -39,10 +39,11 @@ public class ShazamState extends JavaPlugin {
              player.setAllowFlight(true);
              player.setWalkSpeed(SuperPowers.defWalkSpeed*2);
              player.setLevel(4000);
-             for (Achievement c : Achievement.values())
+             player.awardAchievement(Achievement.BOOKCASE);
+             /*for (Achievement c : Achievement.values())
              {
             	 player.awardAchievement(c);
-             }
+             }*/
          }
 	}
 }

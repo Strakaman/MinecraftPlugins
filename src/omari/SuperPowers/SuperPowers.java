@@ -28,29 +28,32 @@ public class SuperPowers extends JavaPlugin {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		 if (sender instanceof Player) {
+			 Player p = (Player) sender;
 		if (command.getName().equalsIgnoreCase("cat")) {
 			//sender.sendMessage("big butts. peter 9-30");
 			AvatarState.catAttack(sender);
 		}
 		
 		if (command.getName().equalsIgnoreCase("glass")) {
-			Player p = (Player) sender;
+			//Player p = (Player) sender;
 			//rainMaker(p);
 			AvatarState.rainMaker(p);
 		}
 		
 		if (command.getName().equalsIgnoreCase("flash")) {
-			Player p = (Player) sender;
+			//Player p = (Player) sender;
 			//rainMaker(p);
 			//sender.sendMessage("walk speed:" + p.getWalkSpeed());
+			turnOtherPowersOff(p, true);
 			FlashState.flashPoint(p, true);
 		}
 		if (command.getName().equalsIgnoreCase("kazaam")) {
-			Player p = (Player) sender;
+			//Player p = (Player) sender;
 			//rainMaker(p);
 			Kazaam.rainFood(p);
 		}	  
 		if (command.getName().equalsIgnoreCase("shazam")) {
+			turnOtherPowersOff(p, false);
 			ShazamState.Shazam(sender);
 		}	
 		
@@ -70,11 +73,15 @@ public class SuperPowers extends JavaPlugin {
 		
 	}
 	
-//	public void turnAllPowersOff()
-//	{
-//		Flash(false);
-//		Shazam(false);
-//	}
+	public void turnOtherPowersOff(Player thePlaya, boolean turnOffShazamToo)
+	{//shazam too boolean is true for all superpower calls that aren't shazam
+		FlashState.flashPoint(thePlaya,false);
+		//turn AvatarState Off
+		if (turnOffShazamToo)
+		{
+			ShazamState.Shazam((CommandSender)thePlaya);
+		}
+	}
 //	
 //	public void Shazam(boolean turnOn)
 //	{

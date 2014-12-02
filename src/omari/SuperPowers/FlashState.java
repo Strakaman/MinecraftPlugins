@@ -9,6 +9,7 @@ public class FlashState {
 		if (turnOn)
 		{
 			p.setWalkSpeed(SuperPowers.defWalkSpeed*5);
+			p.sendMessage(p.getName() + " is the fastest player alive!");
 		}
 		else
 		{
