@@ -85,9 +85,9 @@ public class AvatarState extends JavaPlugin {
 		makeYBlocks(loc, 5, Material.IRON_BLOCK);
 		p.getInventory().setItemInHand(new ItemStack(Material.IRON_PICKAXE,1));
 		p.getPlayer().getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
-		p.getPlayer().getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
-		p.getPlayer().getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
-		p.getPlayer().getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
+		p.getPlayer().getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+		p.getPlayer().getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+		p.getPlayer().getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
 	}
 	
 	public static void waterBend(Player p) {
