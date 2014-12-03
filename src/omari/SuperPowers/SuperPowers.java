@@ -23,6 +23,7 @@ public class SuperPowers extends JavaPlugin {
 
 	public void onEnable() {
 		getLogger().info(("peter 9-30"));
+		getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 	}
 	
 	@Override
