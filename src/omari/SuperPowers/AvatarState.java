@@ -7,6 +7,8 @@ import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class AvatarState extends JavaPlugin {
@@ -23,7 +25,7 @@ public class AvatarState extends JavaPlugin {
 	}
 	
 	public static void fireBend(Player p) {
-		
+		p.getInventory().setItemInHand(new ItemStack(Material.FIREBALL,1));
 	}
 
 	public static void lavaBend(Player p) {
@@ -46,6 +48,7 @@ public class AvatarState extends JavaPlugin {
 		loc.setZ(morgan-5); 
 		bl = loc.getBlock();
 		bl.setType(Material.LAVA);
+		p.getInventory().setItemInHand(new ItemStack(Material.LAVA_BUCKET,1));
 	}
 	
 	public static void metalBend(Player p) {
@@ -55,8 +58,8 @@ public class AvatarState extends JavaPlugin {
 //		Block b = loc.getBlock();
 //		b.setType(Material.WATER);
 		Location loc = p.getLocation();
-		double initialY = loc.getY();
-		
+		double initialY = loc.getY() - 1;
+		loc.setY(initialY);
 		loc.setX(loc.getX() + 1);
 		makeYBlocks(loc, 5, Material.IRON_BLOCK);
 		loc.setY(initialY);
@@ -80,6 +83,11 @@ public class AvatarState extends JavaPlugin {
 		loc.setY(initialY);
 		loc.setX(loc.getX() + 1);
 		makeYBlocks(loc, 5, Material.IRON_BLOCK);
+		p.getInventory().setItemInHand(new ItemStack(Material.IRON_PICKAXE,1));
+		p.getPlayer().getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
+		p.getPlayer().getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
+		p.getPlayer().getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
+		p.getPlayer().getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
 	}
 	
 	public static void waterBend(Player p) {
@@ -103,6 +111,7 @@ public class AvatarState extends JavaPlugin {
 		loc.setZ(morgan-5); 
 		bl = loc.getBlock();
 		bl.setType(Material.WATER);
+		p.getInventory().setItemInHand(new ItemStack(Material.WATER_BUCKET,1));
 	}
 	
 	public static void earthBend(Player p) {
@@ -112,6 +121,7 @@ public class AvatarState extends JavaPlugin {
 		earthPosZDomino(loc, 3, -2, 3, 0, 0, 2, p);
 		resetCoord(loc);
 		earthPosZDomino(loc, 3, -2, -3, 0, 0, -2, p);
+		p.getInventory().setItemInHand(new ItemStack(Material.DIRT,1));
 	}
 	
 	public static void earthPosZDomino(Location loc, double wallSize, double x, double z, double y, double xGap, double zGap, Player p) {
