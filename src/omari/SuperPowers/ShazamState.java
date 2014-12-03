@@ -1,6 +1,7 @@
 package omari.SuperPowers;
 import java.util.ArrayList;
 
+
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
