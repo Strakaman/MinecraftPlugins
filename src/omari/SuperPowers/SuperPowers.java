@@ -37,7 +37,7 @@ public class SuperPowers extends JavaPlugin {
 		if (command.getName().equalsIgnoreCase("glass")) {
 			//Player p = (Player) sender;
 			//rainMaker(p);
-			AvatarState.rainMaker(p);
+			AvatarState.earthBend(p);
 		}
 		
 		if (command.getName().equalsIgnoreCase("flash")) {
