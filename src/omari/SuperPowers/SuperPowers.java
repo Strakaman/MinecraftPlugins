@@ -35,10 +35,28 @@ public class SuperPowers extends JavaPlugin {
 			AvatarState.catAttack(sender);
 		}
 		
-		if (command.getName().equalsIgnoreCase("glass")) {
-			//Player p = (Player) sender;
-			//rainMaker(p);
+		if (command.getName().equalsIgnoreCase("airBend")) {
+			AvatarState.airBend(p);
+		}
+		
+		if (command.getName().equalsIgnoreCase("earthBend")) {
 			AvatarState.earthBend(p);
+		}
+		
+		if (command.getName().equalsIgnoreCase("metalBend")) {
+			AvatarState.metalBend(p);
+		}
+		
+		if (command.getName().equalsIgnoreCase("waterBend")) {
+			AvatarState.waterBend(p);
+		}
+		
+		if (command.getName().equalsIgnoreCase("fireBend")) {
+			AvatarState.fireBend(p);
+		}
+		
+		if (command.getName().equalsIgnoreCase("lavabend")) {
+			AvatarState.lavaBend(p);
 		}
 		
 		if (command.getName().equalsIgnoreCase("flash")) {

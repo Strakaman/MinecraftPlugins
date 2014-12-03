@@ -5,8 +5,16 @@ version: 0.1
 commands:
   cat:
     description: butts
-  glass:
-    description: butts
+  airBend:
+    description: Fly!
+  earthBend:
+    description: Earth walls!
+  waterBend:
+    description: Water columns!
+  fireBend:
+    description: Shoot fire!
+  metalBend:
+    description: Iron shield!
   flash:
     description: Super speed dude.
   shazam:

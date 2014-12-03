@@ -10,41 +10,76 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class AvatarState extends JavaPlugin {
-	private static double height = 5;
 	private static double initialY;
 	private static double initialX;
 	private static double initialZ;
-	public static double width = 5;
 
 	public static void catAttack(CommandSender sender) {
 		sender.sendMessage("WORK YOU PIECE OF AVATAR!");
 	}
 	
-	public static void glassMaker(Player p) {
+	public static void airBend(Player p) {
+		p.setAllowFlight(true);
+	}
+	
+	public static void fireBend(Player p) {
+		
+	}
+
+	public static void lavaBend(Player p) {
+		Location loc = p.getLocation();
+		double james = loc.getX();
+		double morgan = loc.getZ();
+		double ahmad = loc.getY();
+		
+		loc.setX(james + 5);
+		Block bl = loc.getBlock();
+		bl.setType(Material.LAVA);
+		loc.setX(james-5); 
+		bl = loc.getBlock();
+		bl.setType(Material.LAVA);
+		loc.setX(james); //revert x to default
+		
+		loc.setZ(morgan + 5);
+		bl = loc.getBlock();
+		bl.setType(Material.LAVA);
+		loc.setZ(morgan-5); 
+		bl = loc.getBlock();
+		bl.setType(Material.LAVA);
+	}
+	
+	public static void metalBend(Player p) {
 
 //		Location loc = p.getPlayer().getLocation();
 //		loc.setY(loc.getY() + height);
 //		Block b = loc.getBlock();
 //		b.setType(Material.WATER);
 		Location loc = p.getLocation();
-		initialY = loc.getY();
+		double initialY = loc.getY();
 		
 		loc.setX(loc.getX() + 1);
-		makeVerticleBlocks(loc);
+		makeYBlocks(loc, 5, Material.IRON_BLOCK);
+		loc.setY(initialY);
 		loc.setZ(loc.getZ() + 1);
-		makeVerticleBlocks(loc);
+		makeYBlocks(loc, 5, Material.IRON_BLOCK);
+		loc.setY(initialY);
 		loc.setX(loc.getX() - 1);
-		makeVerticleBlocks(loc);
+		makeYBlocks(loc, 5, Material.IRON_BLOCK);
+		loc.setY(initialY);
 		loc.setX(loc.getX() - 1);
-		makeVerticleBlocks(loc);
+		makeYBlocks(loc, 5, Material.IRON_BLOCK);
+		loc.setY(initialY);
 		loc.setZ(loc.getZ() -1);
-		makeVerticleBlocks(loc);
+		makeYBlocks(loc, 5, Material.IRON_BLOCK);
+		loc.setY(initialY);
 		loc.setZ(loc.getZ() -1);
-		makeVerticleBlocks(loc);
+		makeYBlocks(loc, 5, Material.IRON_BLOCK);
+		loc.setY(initialY);
 		loc.setX(loc.getX() + 1);
-		makeVerticleBlocks(loc);
-		loc.setZ(loc.getX() + 1);
-		makeVerticleBlocks(loc);
+		makeYBlocks(loc, 5, Material.IRON_BLOCK);
+		loc.setY(initialY);
+		loc.setX(loc.getX() + 1);
+		makeYBlocks(loc, 5, Material.IRON_BLOCK);
 	}
 	
 	public static void waterBend(Player p) {
@@ -72,41 +107,85 @@ public class AvatarState extends JavaPlugin {
 	
 	public static void earthBend(Player p) {
 		Location loc = p.getLocation();
-		setInitialCoord(loc);
-		double james = loc.getX();
-		double morgan = loc.getZ();
-		double ahmad = loc.getY();
-		
-		loc.setZ(morgan + 3);
-		width = 3;
-		makeHBlocks(loc);
+		setInitialCoord(p);
+		resetCoord(loc);
+		earthPosZDomino(loc, 3, -2, 3, 0, 0, 2, p);
+		resetCoord(loc);
+		earthPosZDomino(loc, 3, -2, -3, 0, 0, -2, p);
 	}
 	
-	public static void setInitialCoord(Location loc) {
+	public static void earthPosZDomino(Location loc, double wallSize, double x, double z, double y, double xGap, double zGap, Player p) {
+		setInitialCoord(p);
+		earthWall(loc, wallSize, x, z, y);
+		resetCoord(loc);
+		
+		earthWall(loc, wallSize, x + xGap, z + zGap, y);
+		earthWall(loc, wallSize, x - 1, 0, 1);
+		resetCoord(loc);
+		
+		earthWall(loc, wallSize, x + xGap * 2, z + zGap * 2, y);
+		earthWall(loc, wallSize, -wallSize, 0, 1);
+		earthWall(loc, wallSize, -wallSize, 0, 1);
+		resetCoord(loc);
+		
+		earthWall(loc, wallSize, x + xGap * 3, z + zGap * 3, y);
+		earthWall(loc, wallSize, -wallSize, 0, 1);
+		earthWall(loc, wallSize, -wallSize, 0, 1);
+		earthWall(loc, wallSize, -wallSize, 0, 1);
+		resetCoord(loc);
+	}
+	
+	public static void earthWall(Location loc, double wallSize, double xOffSet, double zOffSet, double yOffSet) {
+		double x = loc.getX();
+		double z = loc.getZ();
+		double y = loc.getY();
+		
+		loc.setX(x + xOffSet);
+		loc.setZ(z + zOffSet);
+		loc.setY(y + yOffSet);
+		makeXBlocks(loc, wallSize, Material.DIRT);
+	}
+	
+	public static void resetCoord(Location loc) {
+		loc.setX(initialX);
+		loc.setY(initialY);
+		loc.setZ(initialZ);
+	}
+	
+	public static void setInitialCoord(Player p) {
+		Location loc = p.getLocation();
 		initialY = loc.getY();
 		initialX = loc.getX();
 		initialZ = loc.getZ();
 	}
 	
-	public static void makeVerticleBlocks(Location loc) {
-		loc.setY(initialY);
-		for (int i = 0; i < height; i++) {
+	public static void makeYBlocks(Location loc, double length, Material mat) {
+		for (int i = 0; i < length; i++) {
 			loc.setY(loc.getY() + 1);
 			
 			Block bl = loc.getBlock();
-			bl.setType(Material.GLASS);
+			bl.setType(mat);
 		}
 	}
 	
-	public static void makeHBlocks(Location loc) {
-		loc.setX(initialX);
-		for (int i = 0; i < width; i++) {
+	public static void makeXBlocks(Location loc, double length, Material mat) {
+		for (int i = 0; i < length; i++) {
 			loc.setX(loc.getX() + 1);
 			
 			Block bl = loc.getBlock();
-			bl.setType((Material.DIRT));
+			bl.setType(mat);
 		}
 	}
+	
+	public static void makeZBlocks(Location loc, double length, Material mat) {
+		for (int i = 0; i < length; i++) {
+			loc.setX(loc.getX() + 1);
+			
+			Block bl = loc.getBlock();
+			bl.setType(mat);
+		}
+	}
+	
 	@Override
 	public void onDisable() {
 		// TODO Auto-generated method stub
