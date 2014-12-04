@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class PlayerListener implements Listener{
 	SuperPowers powerLinkedToListener; //just in case we need to reference the main java plugin for some reason?
@@ -23,8 +24,7 @@ public class PlayerListener implements Listener{
 	//called whenever a player right clicks
 	@EventHandler
 	public void playerRightClicked(PlayerInteractEntityEvent event) {
-	    event.getPlayer().sendMessage("Dawg, you can't right click" + event.getRightClicked() + "right now.");
-	   
+	    //event.getPlayer().sendMessage("Dawg, you can't right click" + event.getRightClicked() + "right now.");
 	}
 	
 	//called whenever a player left clicks
@@ -32,7 +32,7 @@ public class PlayerListener implements Listener{
 		public void playerLeftClicked(PlayerInteractEvent event) {
 		   if (!event.hasItem())
 		   {
-			   event.getPlayer().sendMessage("Strength of Hercules!");		
+			   //event.getPlayer().sendMessage("Strength of Hercules!");		
 		   }
 		   if (event.getPlayer().getItemInHand().getType() == Material.FIREBALL) {
 			   event.getPlayer().launchProjectile(Fireball.class);
@@ -56,4 +56,10 @@ public class PlayerListener implements Listener{
 					  }
 				  }
 				}
+				
+				//called whenever the player dies
+				   @EventHandler
+				    public void entitydamageotherentity(PlayerDeathEvent event) {
+				      powerLinkedToListener.turnOtherPowersOff(event.getEntity(),true);
+				    }
 }

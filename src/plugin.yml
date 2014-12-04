@@ -5,6 +5,8 @@ version: 0.1
 commands:
   cat:
     description: butts
+  avatarState:
+    description: Turn into dah avatah!
   airBend:
     description: Fly!
   earthBend:

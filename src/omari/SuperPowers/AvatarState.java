@@ -16,18 +16,53 @@ public class AvatarState extends JavaPlugin {
 	private static double initialY;
 	private static double initialX;
 	private static double initialZ;
-
-	public static void catAttack(CommandSender sender) {
-		sender.sendMessage("WORK YOU PIECE OF AVATAR!");
+	private static boolean activated;
+	
+	public static void activateAvatar(Player p, boolean isOn) {
+		if (isOn) {
+			activated = isOn;
+			p.setAllowFlight(true);
+			p.getInventory().setItemInHand(new ItemStack(Material.FIREBALL,1));
+			//p.launchProjectile(Fireball.class);
+		} else {
+			activated = isOn;
+		}
+	}
+	
+	public static void commandAvatar(Player p, Command command) {
+		if (activated) {
+		if (command.getName().equalsIgnoreCase("airBend")) {
+			//airBend(p);
+		}
+		
+		if (command.getName().equalsIgnoreCase("earthBend")) {
+			earthBend(p);
+		}
+		
+		if (command.getName().equalsIgnoreCase("metalBend")) {
+			metalBend(p);
+		}
+		
+		if (command.getName().equalsIgnoreCase("waterBend")) {
+			waterBend(p);
+		}
+		
+		if (command.getName().equalsIgnoreCase("fireBend")) {
+			//fireBend(p);
+		}
+		
+		if (command.getName().equalsIgnoreCase("lavabend")) {
+			lavaBend(p);
+		}
+		}
 	}
 	
 	public static void airBend(Player p) {
-		p.setAllowFlight(true);
+		
 	}
 	
 	public static void fireBend(Player p) {
-		p.getInventory().setItemInHand(new ItemStack(Material.FIREBALL,1));
-		p.launchProjectile(Fireball.class);
+		
 	}
 
 	public static void lavaBend(Player p) {
@@ -127,7 +162,7 @@ public class AvatarState extends JavaPlugin {
 		earthPosXDomino(loc, 3, 3, -2, 0, 2, 0, p);
 		resetCoord(loc);
 		earthPosXDomino(loc, 3, -3, -2, 0, -2, 0, p);
-		p.getInventory().setItemInHand(new ItemStack(Material.DIRT,1));
+		p.getInventory().setItemInHand(new ItemStack(Material.DIRT,64));
 	}
 	
 	public static void earthPosZDomino(Location loc, double wallSize, double x, double z, double y, double xGap, double zGap, Player p) {

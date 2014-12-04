@@ -18,7 +18,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class SuperPowers extends JavaPlugin {
 
 	static float defWalkSpeed = 0.2f;
-	boolean firstPoweralreadyTriggered = false;
 	Player player;
 
 	public void onEnable() {
@@ -30,34 +29,13 @@ public class SuperPowers extends JavaPlugin {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		 if (sender instanceof Player) {
 			 Player p = (Player) sender;
-		if (command.getName().equalsIgnoreCase("cat")) {
-			//sender.sendMessage("big butts. peter 9-30");
-			AvatarState.catAttack(sender);
-		}
 		
-		if (command.getName().equalsIgnoreCase("airBend")) {
-			AvatarState.airBend(p);
+		if (command.getName().equalsIgnoreCase("avatarState")) {
+			turnOtherPowersOff(p, true);
+			AvatarState.activateAvatar(p, true);
 		}
-		
-		if (command.getName().equalsIgnoreCase("earthBend")) {
-			AvatarState.earthBend(p);
-		}
-		
-		if (command.getName().equalsIgnoreCase("metalBend")) {
-			AvatarState.metalBend(p);
-		}
-		
-		if (command.getName().equalsIgnoreCase("waterBend")) {
-			AvatarState.waterBend(p);
-		}
-		
-		if (command.getName().equalsIgnoreCase("fireBend")) {
-			AvatarState.fireBend(p);
-		}
-		
-		if (command.getName().equalsIgnoreCase("lavabend")) {
-			AvatarState.lavaBend(p);
-		}
+		AvatarState.commandAvatar(p, command);
+
 		
 		if (command.getName().equalsIgnoreCase("flash")) {
 			//Player p = (Player) sender;
@@ -95,6 +73,7 @@ public class SuperPowers extends JavaPlugin {
 	public void turnOtherPowersOff(Player thePlaya, boolean turnOffShazamToo)
 	{//shazam too boolean is true for all superpower calls that aren't shazam
 		FlashState.flashPoint(thePlaya,false);
+		AvatarState.activateAvatar(thePlaya, false);
 		//turn AvatarState Off
 		if (turnOffShazamToo)
 		{
