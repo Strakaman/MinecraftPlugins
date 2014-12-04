@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -26,6 +27,7 @@ public class AvatarState extends JavaPlugin {
 	
 	public static void fireBend(Player p) {
 		p.getInventory().setItemInHand(new ItemStack(Material.FIREBALL,1));
+		p.launchProjectile(Fireball.class);
 	}
 
 	public static void lavaBend(Player p) {
@@ -121,31 +123,35 @@ public class AvatarState extends JavaPlugin {
 		earthPosZDomino(loc, 3, -2, 3, 0, 0, 2, p);
 		resetCoord(loc);
 		earthPosZDomino(loc, 3, -2, -3, 0, 0, -2, p);
+		resetCoord(loc);
+		earthPosXDomino(loc, 3, 3, -2, 0, 2, 0, p);
+		resetCoord(loc);
+		earthPosXDomino(loc, 3, -3, -2, 0, -2, 0, p);
 		p.getInventory().setItemInHand(new ItemStack(Material.DIRT,1));
 	}
 	
 	public static void earthPosZDomino(Location loc, double wallSize, double x, double z, double y, double xGap, double zGap, Player p) {
 		setInitialCoord(p);
-		earthWall(loc, wallSize, x, z, y);
+		earthXWall(loc, wallSize, x, z, y);
 		resetCoord(loc);
 		
-		earthWall(loc, wallSize, x + xGap, z + zGap, y);
-		earthWall(loc, wallSize, x - 1, 0, 1);
+		earthXWall(loc, wallSize, x + xGap, z + zGap, y);
+		earthXWall(loc, wallSize, x - 1, 0, 1);
 		resetCoord(loc);
 		
-		earthWall(loc, wallSize, x + xGap * 2, z + zGap * 2, y);
-		earthWall(loc, wallSize, -wallSize, 0, 1);
-		earthWall(loc, wallSize, -wallSize, 0, 1);
+		earthXWall(loc, wallSize, x + xGap * 2, z + zGap * 2, y);
+		earthXWall(loc, wallSize, -wallSize, 0, 1);
+		earthXWall(loc, wallSize, -wallSize, 0, 1);
 		resetCoord(loc);
 		
-		earthWall(loc, wallSize, x + xGap * 3, z + zGap * 3, y);
-		earthWall(loc, wallSize, -wallSize, 0, 1);
-		earthWall(loc, wallSize, -wallSize, 0, 1);
-		earthWall(loc, wallSize, -wallSize, 0, 1);
+		earthXWall(loc, wallSize, x + xGap * 3, z + zGap * 3, y);
+		earthXWall(loc, wallSize, -wallSize, 0, 1);
+		earthXWall(loc, wallSize, -wallSize, 0, 1);
+		earthXWall(loc, wallSize, -wallSize, 0, 1);
 		resetCoord(loc);
 	}
 	
-	public static void earthWall(Location loc, double wallSize, double xOffSet, double zOffSet, double yOffSet) {
+	public static void earthXWall(Location loc, double wallSize, double xOffSet, double zOffSet, double yOffSet) {
 		double x = loc.getX();
 		double z = loc.getZ();
 		double y = loc.getY();
@@ -154,6 +160,38 @@ public class AvatarState extends JavaPlugin {
 		loc.setZ(z + zOffSet);
 		loc.setY(y + yOffSet);
 		makeXBlocks(loc, wallSize, Material.DIRT);
+	}
+	
+	public static void earthPosXDomino(Location loc, double wallSize, double x, double z, double y, double xGap, double zGap, Player p) {
+		setInitialCoord(p);
+		earthZWall(loc, wallSize, x, z, y);
+		resetCoord(loc);
+		
+		earthZWall(loc, wallSize, x + xGap, z + zGap, y);
+		earthZWall(loc, wallSize, 0, z-1, 1);
+		resetCoord(loc);
+		
+		earthZWall(loc, wallSize, x + xGap * 2, z + zGap * 2, y);
+		earthZWall(loc, wallSize, 0, -wallSize, 1);
+		earthZWall(loc, wallSize, 0, -wallSize, 1);
+		resetCoord(loc);
+		
+		earthZWall(loc, wallSize, x + xGap * 3, z + zGap * 3, y);
+		earthZWall(loc, wallSize, 0, -wallSize, 1);
+		earthZWall(loc, wallSize, 0, -wallSize, 1);
+		earthZWall(loc, wallSize, 0, -wallSize, 1);
+		resetCoord(loc);
+	}
+	
+	public static void earthZWall(Location loc, double wallSize, double xOffSet, double zOffSet, double yOffSet) {
+		double x = loc.getX();
+		double z = loc.getZ();
+		double y = loc.getY();
+		
+		loc.setX(x + xOffSet);
+		loc.setZ(z + zOffSet);
+		loc.setY(y + yOffSet);
+		makeZBlocks(loc, wallSize, Material.DIRT);
 	}
 	
 	public static void resetCoord(Location loc) {
@@ -189,7 +227,7 @@ public class AvatarState extends JavaPlugin {
 	
 	public static void makeZBlocks(Location loc, double length, Material mat) {
 		for (int i = 0; i < length; i++) {
-			loc.setX(loc.getX() + 1);
+			loc.setZ(loc.getZ() + 1);
 			
 			Block bl = loc.getBlock();
 			bl.setType(mat);

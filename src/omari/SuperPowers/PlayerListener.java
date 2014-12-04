@@ -1,7 +1,9 @@
 package omari.SuperPowers;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,7 +32,10 @@ public class PlayerListener implements Listener{
 		public void playerLeftClicked(PlayerInteractEvent event) {
 		   if (!event.hasItem())
 		   {
-			   event.getPlayer().sendMessage("Strength of Hercules!");		   
+			   event.getPlayer().sendMessage("Strength of Hercules!");		
+		   }
+		   if (event.getPlayer().getItemInHand().getType() == Material.FIREBALL) {
+			   event.getPlayer().launchProjectile(Fireball.class);
 		   }
 		}
 		
