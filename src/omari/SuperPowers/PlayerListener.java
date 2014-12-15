@@ -1,5 +1,8 @@
 package omari.SuperPowers;
 
+import java.util.ArrayList;
+
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
@@ -9,22 +12,31 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class PlayerListener implements Listener{
 	SuperPowers powerLinkedToListener; //just in case we need to reference the main java plugin for some reason?
-	
+	ArrayList<EntityDamageEvent.DamageCause> torchImmunity; 
 	public PlayerListener(SuperPowers SP)
 	{
 		powerLinkedToListener = SP;
+		torchImmunity = new ArrayList<EntityDamageEvent.DamageCause>();
+		torchImmunity.add(EntityDamageEvent.DamageCause.FIRE);
+		torchImmunity.add(EntityDamageEvent.DamageCause.BLOCK_EXPLOSION);
+		torchImmunity.add(EntityDamageEvent.DamageCause.FIRE_TICK);
+		torchImmunity.add(EntityDamageEvent.DamageCause.LAVA);
+		torchImmunity.add(EntityDamageEvent.DamageCause.ENTITY_EXPLOSION);
+		
 	}
 	
 	//called whenever a player right clicks
 	@EventHandler
 	public void playerRightClicked(PlayerInteractEntityEvent event) {
 	    //event.getPlayer().sendMessage("Dawg, you can't right click" + event.getRightClicked() + "right now.");
+		
 	}
 	
 	//called whenever a player left clicks
@@ -33,6 +45,21 @@ public class PlayerListener implements Listener{
 		   if (!event.hasItem())
 		   {
 			   //event.getPlayer().sendMessage("Strength of Hercules!");		
+		   }
+		   if (HumanTorch.playersInTorchState.contains(event.getPlayer()))
+		   {
+			  if (event.getAction().equals(Action.LEFT_CLICK_AIR)){
+			   event.getPlayer().launchProjectile(Fireball.class);
+			  }
+			  if (event.getAction().equals(Action.RIGHT_CLICK_AIR)){
+				  Player player = event.getPlayer();
+				  Location pLoc = player.getLocation();
+				  player.getWorld().createExplosion(pLoc.getX(), pLoc.getY(), pLoc.getZ(), 3f,true,false); }
+		   }
+		   if (ShazamState.playersInShazamState.contains(event.getPlayer()))
+		   {
+			  if (event.getAction().equals(Action.RIGHT_CLICK_AIR)){
+				 }
 		   }
 		   if (event.getPlayer().getItemInHand().getType() == Material.FIREBALL) {
 			   event.getPlayer().launchProjectile(Fireball.class);
@@ -53,13 +80,33 @@ public class PlayerListener implements Listener{
 						  Damageable d = (Damageable)event.getEntity();
 						  d.damage(event.getDamage());
 						  d.damage(event.getDamage());
+						  d.damage(event.getDamage());
 					  }
 				  }
 				}
 				
 				//called whenever the player dies
 				   @EventHandler
-				    public void entitydamageotherentity(PlayerDeathEvent event) {
+				    public void playerDied(PlayerDeathEvent event) {
 				      powerLinkedToListener.turnOtherPowersOff(event.getEntity(),true);
 				    }
+				   
+				 //called whenever the player takes damage
+				   @EventHandler
+				    public void playerTakeDamage(EntityDamageEvent event) {
+				     if (torchImmunity.contains(event.getCause()))
+				     {
+				    	 if (event.getEntity() instanceof Player)
+				    	 {
+				    		 Player pp = (Player)event.getEntity();
+				    		 if (HumanTorch.playersInTorchState.contains(pp))
+				    		 {
+				    			 event.setCancelled(true); //should theoretically stop torch ppl from taking damage due to being on fire
+				    			 pp.setFireTicks(pp.getFireTicks()+1); //should theoretically allow them to be on fire infinitely
+				    		 }
+				    	 }
+				     }
+				    }
+				    
+				   
 }

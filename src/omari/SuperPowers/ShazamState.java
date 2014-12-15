@@ -41,10 +41,22 @@ public class ShazamState extends JavaPlugin {
              player.setWalkSpeed(SuperPowers.defWalkSpeed*2);
              player.setLevel(4000);
              player.awardAchievement(Achievement.BOOKCASE);
+             //player.setFoodLevel();
              /*for (Achievement c : Achievement.values())
              {
             	 player.awardAchievement(c);
              }*/
          }
+	}
+	public static void ShazamOff(Player thePlaya) {
+		if (playersInShazamState.contains(thePlaya))
+		{
+			playersInShazamState.remove(thePlaya);
+            thePlaya.setAllowFlight(false);
+            thePlaya.setWalkSpeed(SuperPowers.defWalkSpeed);
+            thePlaya.setLevel(5);
+            
+		}
+		
 	}
 }

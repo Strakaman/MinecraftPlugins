@@ -74,10 +74,11 @@ public class SuperPowers extends JavaPlugin {
 	{//shazam too boolean is true for all superpower calls that aren't shazam
 		FlashState.flashPoint(thePlaya,false);
 		AvatarState.activateAvatar(thePlaya, false);
+		HumanTorch.flameOff(thePlaya);
 		//turn AvatarState Off
 		if (turnOffShazamToo)
 		{
-			ShazamState.Shazam((CommandSender)thePlaya);
+			ShazamState.ShazamOff(thePlaya);
 		}
 	}
 //	
