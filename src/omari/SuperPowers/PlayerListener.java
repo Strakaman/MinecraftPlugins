@@ -103,13 +103,13 @@ public class PlayerListener implements Listener {
 
 	//called whenever the player moves
 	public void playerMoved(PlayerMoveEvent event) {
-		/*if (HumanTorch.playersInTorchState.contains(event.getPlayer())){
+		if (HumanTorch.playersInTorchState.contains(event.getPlayer())){
 		Material m = event.getPlayer().getLocation().getBlock().getType();
 	    if (m == Material.STATIONARY_WATER || m == Material.WATER) {
 	        // player is in water
 	    	HumanTorch.flameOff(event.getPlayer()); //should depower you if you hit water
 	    }
-		}*/
+		}
 	}
 	
 	// called whenever the player dies

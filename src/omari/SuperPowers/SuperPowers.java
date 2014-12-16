@@ -16,7 +16,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
 
 public class SuperPowers extends JavaPlugin {
 
@@ -52,6 +56,11 @@ public class SuperPowers extends JavaPlugin {
 			//Player p = (Player) sender;
 			//rainMaker(p);
 			Kazaam.rainFood(p);
+			
+	        BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+	        p.sendMessage("Debug is real repeat");
+	        scheduler.scheduleSyncRepeatingTask(this, new Monta(this), 0L, 0L);
+			
 		}	  
 		if (command.getName().equalsIgnoreCase("shazam")) {
 			turnOtherPowersOff(p, false);

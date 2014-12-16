@@ -13,17 +13,10 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class Kazaam extends JavaPlugin {
 	private static Player pp;
-
+	
 	public static void rainFood(Player p) {
 		pp = p;
-        BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-        scheduler.scheduleSyncRepeatingTask(new Kazaam(), new Runnable() {
-            @Override
-            public void run() {
-                // Do something
-            	pp.getWorld().dropItemNaturally(pp.getLocation(), new ItemStack(Material.BAKED_POTATO));
-            }
-        }, 0L, 20L);
+
     }
 
 }
