@@ -32,7 +32,7 @@ public class SuperPowers extends JavaPlugin {
 		
 		if (command.getName().equalsIgnoreCase("avatarState")) {
 			turnOtherPowersOff(p, true);
-			AvatarState.activateAvatar(p, true);
+			AvatarState.avatarOn(p);
 		}
 		AvatarState.commandAvatar(p, command);
 
@@ -81,7 +81,7 @@ public class SuperPowers extends JavaPlugin {
 	public void turnOtherPowersOff(Player thePlaya, boolean turnOffShazamToo)
 	{//shazam too boolean is true for all superpower calls that aren't shazam
 		FlashState.flashPoint(thePlaya,false);
-		AvatarState.activateAvatar(thePlaya, false);
+		AvatarState.avatarOff(thePlaya);
 		HumanTorch.flameOff(thePlaya);
 		//turn AvatarState Off
 		if (turnOffShazamToo)
