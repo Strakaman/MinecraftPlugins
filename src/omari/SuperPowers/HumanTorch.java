@@ -31,4 +31,9 @@ public class HumanTorch {
             play.setFireTicks(0);
 		}
 	}
+	
+	public static boolean pInState(Player p)
+	{
+		return playersInTorchState.contains(p);
+	}
 }

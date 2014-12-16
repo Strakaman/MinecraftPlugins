@@ -24,6 +24,7 @@ public class ShazamState extends JavaPlugin {
             playersInShazamState.remove(player);
             player.setAllowFlight(false);
             player.setWalkSpeed(SuperPowers.defWalkSpeed);
+            player.setFlySpeed(SuperPowers.defFlySpeed);
             player.setLevel(5);
             for (Achievement c : Achievement.values())
             {
@@ -39,6 +40,7 @@ public class ShazamState extends JavaPlugin {
              s.sendMessage(player.getName() + " called upon the powers of Shazam");
              player.setAllowFlight(true);
              player.setWalkSpeed(SuperPowers.defWalkSpeed*2);
+             player.setFlySpeed(SuperPowers.defFlySpeed*2);
              player.setLevel(4000);
              player.awardAchievement(Achievement.BOOKCASE);
              //player.setFoodLevel();
@@ -54,9 +56,15 @@ public class ShazamState extends JavaPlugin {
 			playersInShazamState.remove(thePlaya);
             thePlaya.setAllowFlight(false);
             thePlaya.setWalkSpeed(SuperPowers.defWalkSpeed);
+            thePlaya.setFlySpeed(SuperPowers.defFlySpeed);
             thePlaya.setLevel(5);
             
 		}
 		
+	}
+	
+	public static boolean pInState(Player p)
+	{
+		return playersInShazamState.contains(p);
 	}
 }

@@ -306,5 +306,9 @@ public class AvatarState extends JavaPlugin {
 		super.onEnable();
 	}
 
+	public static boolean pInState(Player p)
+	{
+		return playersInAvatarState.contains(p);
+	}
 
 }

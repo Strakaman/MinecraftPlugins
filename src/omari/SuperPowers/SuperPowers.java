@@ -1,5 +1,8 @@
 package omari.SuperPowers;
 
+import java.util.List;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -18,6 +21,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class SuperPowers extends JavaPlugin {
 
 	static float defWalkSpeed = 0.2f;
+	static float defFlySpeed = 0.1f;
 	Player player;
 
 	public void onEnable() {
@@ -66,12 +70,31 @@ public class SuperPowers extends JavaPlugin {
 			turnOtherPowersOff(p, true);
 		}
 		
+		if (command.getName().equalsIgnoreCase("cerebro"))
+		{
+			Cerebro(p);
+		}
 	    }
 	        return true;
 	}
 	
-
 	
+	private void Cerebro(Player p) {
+		// TODO Auto-generated method stub
+		Player[] listofPlayers = Bukkit.getOnlinePlayers(); 
+		for (Player pro : listofPlayers)
+		{
+			if (!(pro.equals(p))) //skip yourself because you shouldn't find yourself with Cerebro
+			{
+				if (playerPoweredUp(pro))
+				{
+					p.sendMessage(pro.getName() + ": was found at X: " + pro.getLocation().getX() + " Y: " + pro.getLocation().getY() + " Z: " + pro.getLocation().getZ());
+					pro.sendMessage(p.getName() + "has scanned for you. Beware....");
+				}
+			}
+		}
+	}
+
 	public void setDefaults(Player playa)
 	{
 		
@@ -88,6 +111,11 @@ public class SuperPowers extends JavaPlugin {
 		{
 			ShazamState.ShazamOff(thePlaya);
 		}
+	}
+	
+	public boolean playerPoweredUp(Player pp)
+	{
+		return (AvatarState.pInState(pp)||(ShazamState.pInState(pp)||(FlashState.pInState(pp)||(HumanTorch.pInState(pp)))));
 	}
 //	
 //	public void Shazam(boolean turnOn)
