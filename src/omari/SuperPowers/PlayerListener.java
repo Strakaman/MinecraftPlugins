@@ -22,7 +22,8 @@ public class PlayerListener implements Listener {
 	SuperPowers powerLinkedToListener; // just in case we need to reference the
 										// main java plugin for some reason?
 	ArrayList<EntityDamageEvent.DamageCause> torchImmunity;
-
+	ArrayList<EntityDamageEvent.DamageCause> shazamImmunity;
+	
 	public PlayerListener(SuperPowers SP) {
 		powerLinkedToListener = SP;
 		torchImmunity = new ArrayList<EntityDamageEvent.DamageCause>();
@@ -31,6 +32,8 @@ public class PlayerListener implements Listener {
 		torchImmunity.add(EntityDamageEvent.DamageCause.FIRE_TICK);
 		torchImmunity.add(EntityDamageEvent.DamageCause.LAVA);
 		torchImmunity.add(EntityDamageEvent.DamageCause.ENTITY_EXPLOSION);
+		shazamImmunity.add(EntityDamageEvent.DamageCause.STARVATION);
+		shazamImmunity.add(EntityDamageEvent.DamageCause.LIGHTNING);
 
 	}
 
@@ -115,7 +118,7 @@ public class PlayerListener implements Listener {
 	// called whenever the player takes damage
 	@EventHandler
 	public void playerTakeDamage(EntityDamageEvent event) {
-		if (event.getCause().equals(EntityDamageEvent.DamageCause.STARVATION)) {
+		if (shazamImmunity.contains(event.getCause())) {
 			if (event.getEntity() instanceof Player) {
 				if (ShazamState.playersInShazamState.contains((Player) event
 						.getEntity())) {
