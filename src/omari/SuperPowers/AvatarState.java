@@ -31,7 +31,8 @@ public class AvatarState extends JavaPlugin {
 					
 				}
 		p.setAllowFlight(true);
-		
+		p.getInventory().setItemInHand(new ItemStack(Material.FIREBALL,1));
+		//p.launchProjectile(Fireball.class);	
 	}
 	
 	public static void avatarOff(Player play)
@@ -46,9 +47,7 @@ public class AvatarState extends JavaPlugin {
 //	public static void activateAvatar(Player p, boolean isOn) {
 //		if (isOn) {
 //			activated = isOn;
-//			p.setAllowFlight(true);
-//			p.getInventory().setItemInHand(new ItemStack(Material.FIREBALL,1));
-//			//p.launchProjectile(Fireball.class);
+
 //		} else {
 //			activated = isOn;
 //		}

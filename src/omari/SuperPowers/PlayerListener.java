@@ -27,6 +27,7 @@ public class PlayerListener implements Listener {
 	public PlayerListener(SuperPowers SP) {
 		powerLinkedToListener = SP;
 		torchImmunity = new ArrayList<EntityDamageEvent.DamageCause>();
+		shazamImmunity = new ArrayList<EntityDamageEvent.DamageCause>();
 		torchImmunity.add(EntityDamageEvent.DamageCause.FIRE);
 		torchImmunity.add(EntityDamageEvent.DamageCause.BLOCK_EXPLOSION);
 		torchImmunity.add(EntityDamageEvent.DamageCause.FIRE_TICK);
