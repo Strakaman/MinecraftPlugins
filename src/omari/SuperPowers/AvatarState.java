@@ -1,6 +1,8 @@
 package omari.SuperPowers;
 
 
+import java.util.ArrayList;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -18,19 +20,42 @@ public class AvatarState extends JavaPlugin {
 	private static double initialZ;
 	private static boolean activated;
 	
-	public static void activateAvatar(Player p, boolean isOn) {
-		if (isOn) {
-			activated = isOn;
-			p.setAllowFlight(true);
-			p.getInventory().setItemInHand(new ItemStack(Material.FIREBALL,1));
-			//p.launchProjectile(Fireball.class);
-		} else {
-			activated = isOn;
+	static ArrayList<Player> playersInAvatarState = new ArrayList<Player>();
+	
+	public static void avatarOn(CommandSender s)
+	{
+		Player p = (Player)s;
+		if (!playersInAvatarState.contains(p))
+				{
+			playersInAvatarState.add(p);
+					
+				}
+		p.setAllowFlight(true);
+		
+	}
+	
+	public static void avatarOff(Player play)
+	{
+		if (playersInAvatarState.contains(play))
+		{
+			playersInAvatarState.remove(play);
+            play.setAllowFlight(false);
 		}
 	}
 	
+//	public static void activateAvatar(Player p, boolean isOn) {
+//		if (isOn) {
+//			activated = isOn;
+//			p.setAllowFlight(true);
+//			p.getInventory().setItemInHand(new ItemStack(Material.FIREBALL,1));
+//			//p.launchProjectile(Fireball.class);
+//		} else {
+//			activated = isOn;
+//		}
+//	}
+	
 	public static void commandAvatar(Player p, Command command) {
-		if (activated) {
+		if (playersInAvatarState.contains(p)) {
 		if (command.getName().equalsIgnoreCase("airBend")) {
 			//airBend(p);
 		}
