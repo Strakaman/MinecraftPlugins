@@ -27,3 +27,5 @@ commands:
     description: Rains food.
   debug:
     description: Debugs stuff.
+  flameon:
+    description: flame the fuck on.

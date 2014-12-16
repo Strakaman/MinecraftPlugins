@@ -56,6 +56,10 @@ public class SuperPowers extends JavaPlugin {
 		
 		if (command.getName().equalsIgnoreCase("debug")) {
 			Debug.debugStuff(sender);
+			sender.sendMessage("Debugging");
+		}
+		if (command.getName().equalsIgnoreCase("flameon")) {
+			HumanTorch.flameOn(sender);
 		}
 		
 	    }
