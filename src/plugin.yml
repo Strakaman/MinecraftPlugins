@@ -28,4 +28,6 @@ commands:
   debug:
     description: Debugs stuff.
   flameon:
-    description: flame the fuck on.
+    description: flame the f@!$ on.
+  revert:
+    description: revert the F@!& off.

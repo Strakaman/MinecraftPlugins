@@ -36,7 +36,12 @@ public class PlayerListener implements Listener{
 	@EventHandler
 	public void playerRightClicked(PlayerInteractEntityEvent event) {
 	    //event.getPlayer().sendMessage("Dawg, you can't right click" + event.getRightClicked() + "right now.");
-		
+		 if (HumanTorch.playersInTorchState.contains(event.getPlayer()))
+		   {
+			 	  Player player = event.getPlayer();
+				  Location pLoc = player.getLocation();
+				  player.getWorld().createExplosion(pLoc.getX(), pLoc.getY(), pLoc.getZ(), 3f,true,false); 
+		   }
 	}
 	
 	//called whenever a player left clicks
@@ -51,10 +56,6 @@ public class PlayerListener implements Listener{
 			  if (event.getAction().equals(Action.LEFT_CLICK_AIR)){
 			   event.getPlayer().launchProjectile(Fireball.class);
 			  }
-			  if (event.getAction().equals(Action.RIGHT_CLICK_AIR)){
-				  Player player = event.getPlayer();
-				  Location pLoc = player.getLocation();
-				  player.getWorld().createExplosion(pLoc.getX(), pLoc.getY(), pLoc.getZ(), 3f,true,false); }
 		   }
 		   if (ShazamState.playersInShazamState.contains(event.getPlayer()))
 		   {
