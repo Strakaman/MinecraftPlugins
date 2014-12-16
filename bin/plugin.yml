@@ -31,3 +31,5 @@ commands:
     description: flame the f@!$ on.
   revert:
     description: revert the F@!& off.
+  cerebro:
+    description: everybody!

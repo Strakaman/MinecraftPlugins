@@ -90,10 +90,12 @@ public class PlayerListener implements Listener {
 			if (ShazamState.playersInShazamState.contains(p)) {
 				// take 3x as must damage as you just took
 				p.sendMessage("Should be doing more damage");
-				Damageable d = (Damageable) event.getEntity();
+				/*Damageable d = (Damageable) event.getEntity();
+				
 				d.damage(event.getDamage());
 				d.damage(event.getDamage());
-				d.damage(event.getDamage());
+				d.damage(event.getDamage());*/
+				event.setDamage(event.getDamage()*4);
 			}
 		}
 	}
