@@ -102,13 +102,13 @@ public class PlayerListener implements Listener {
 
 	//called whenever the player moves
 	public void playerMoved(PlayerMoveEvent event) {
-		if (HumanTorch.playersInTorchState.contains(event.getPlayer())){
+		/*if (HumanTorch.playersInTorchState.contains(event.getPlayer())){
 		Material m = event.getPlayer().getLocation().getBlock().getType();
 	    if (m == Material.STATIONARY_WATER || m == Material.WATER) {
 	        // player is in water
 	    	HumanTorch.flameOff(event.getPlayer()); //should depower you if you hit water
 	    }
-		}
+		}*/
 	}
 	
 	// called whenever the player dies
@@ -122,8 +122,7 @@ public class PlayerListener implements Listener {
 	public void playerTakeDamage(EntityDamageEvent event) {
 		if (shazamImmunity.contains(event.getCause())) {
 			if (event.getEntity() instanceof Player) {
-				if (ShazamState.playersInShazamState.contains((Player) event
-						.getEntity())) {
+				if (ShazamState.playersInShazamState.contains((Player) event.getEntity())) {
 					event.setCancelled(true); // should theoretically give
 												// shazam the stamina of atlas
 				}
@@ -134,11 +133,8 @@ public class PlayerListener implements Listener {
 			if (event.getEntity() instanceof Player) {
 				Player pp = (Player) event.getEntity();
 				if (HumanTorch.playersInTorchState.contains(pp)) {
-					event.setCancelled(true); // should theoretically stop torch
-												// ppl from taking damage due to
-												// being on fire
-					pp.setFireTicks(pp.getFireTicks() + 1); // should
-															// theoretically
+					event.setCancelled(true); // should theoretically stop torch ppl from taking damage due to being on fire
+					pp.setFireTicks(pp.getFireTicks() + 1); // should theoretically
 															// allow them to be
 															// on fire
 															// infinitely
