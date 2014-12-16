@@ -59,7 +59,7 @@ public class SuperPowers extends JavaPlugin {
 			
 	        BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 	        p.sendMessage("Debug is real repeat");
-	        scheduler.scheduleSyncRepeatingTask(this, new Monta(this), 0L, 0L);
+	        scheduler.scheduleAsyncDelayedTask(this, new Monta(this, p), 0L);
 			
 		}	  
 		if (command.getName().equalsIgnoreCase("shazam")) {
