@@ -134,10 +134,7 @@ public class PlayerListener implements Listener {
 				Player pp = (Player) event.getEntity();
 				if (HumanTorch.playersInTorchState.contains(pp)) {
 					event.setCancelled(true); // should theoretically stop torch ppl from taking damage due to being on fire
-					pp.setFireTicks(pp.getFireTicks() + 1); // should theoretically
-															// allow them to be
-															// on fire
-															// infinitely
+					pp.setFireTicks(pp.getFireTicks() + 1); // should theoretically allow them to be on fire indefinitely
 				}
 			}
 		}
