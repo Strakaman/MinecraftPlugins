@@ -26,6 +26,7 @@ public class SuperPowers extends JavaPlugin {
 
 	static float defWalkSpeed = 0.2f;
 	static float defFlySpeed = 0.1f;
+	static boolean kazaaming = false;
 	Player player;
 
 	public void onEnable() {
@@ -55,16 +56,17 @@ public class SuperPowers extends JavaPlugin {
 			turnOtherPowersOff(p, true);
 			FlashState.flashPoint(p, true);
 		}
+		if (kazaaming == false) {
 		if (command.getName().equalsIgnoreCase("kazaam")) {
-			//Player p = (Player) sender;
-			//rainMaker(p);
-			Kazaam.rainFood(p);
-			
 	        BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-	        p.sendMessage("Debug is real repeat");
+	        //p.sendMessage("Debug is real repeat");
+	        kazaaming = true;
 	        scheduler.scheduleAsyncDelayedTask(this, new Monta(this, p), 0L);
-			
-		}	  
+		}
+		} else {
+    		p.sendMessage("Someone else Shaq'tin the fool.");
+		}
+		
 		if (command.getName().equalsIgnoreCase("shazam")) {
 			turnOtherPowersOff(p, false);
 			ShazamState.Shazam(sender);

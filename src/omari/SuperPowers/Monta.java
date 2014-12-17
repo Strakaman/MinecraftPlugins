@@ -11,18 +11,16 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 
 public class Monta extends BukkitRunnable{
-	SuperPowers mvp;
-	BukkitScheduler scheduler;
-	Player hateTheGame;
-	private static Material[] foodList;
-	
+	final SuperPowers mvp;
+	final BukkitScheduler scheduler;
+	final Player hateTheGame;
+	private static Material[] foodList = new Material[7];
 	
 	public Monta(SuperPowers sp, Player p) {
 		// TODO Auto-generated constructor stub
 		mvp = sp;
 		scheduler = Bukkit.getServer().getScheduler();
 		hateTheGame = p;
-		foodList = new Material[7];
 		foodList[0] = Material.COOKED_BEEF;
 		foodList[1] = Material.COOKED_CHICKEN;
 		foodList[2] = Material.BAKED_POTATO;
@@ -40,17 +38,24 @@ public class Monta extends BukkitRunnable{
 		int morgan = hateTheGame.getLocation().getBlockZ();
 		int ahmad = hateTheGame.getLocation().getBlockY();
 		Location loc = hateTheGame.getLocation();
-    	if (counter > 30) {
+    	if (counter > 5) {
+    		SuperPowers.kazaaming = false;
     		this.cancel();
     	} else {
-    	loc.setX(james + randInt(-10, 10));
+    	for (int i = 0; i < 10; i++) {
+    	calcRandomDrop(loc, james, morgan, ahmad);
+    	}
+    	counter++;
+    	scheduler.scheduleAsyncDelayedTask(mvp, this, 20);
+    	}
+    }
+	
+	void calcRandomDrop(Location loc, int james, int morgan, int ahmad) {
+		loc.setX(james + randInt(-10, 10));
     	loc.setZ(morgan + randInt(-10, 10));
     	loc.setY(ahmad + 10);
     	hateTheGame.getWorld().dropItemNaturally(loc, new ItemStack(foodList[randInt(0, 6)]));
-    	counter++;
-    	scheduler.scheduleAsyncDelayedTask(mvp, this, 5);
-    	}
-    }
+	}
 	
 	public static int randInt(int min, int max) {
 
