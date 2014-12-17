@@ -103,6 +103,10 @@ public class PlayerListener implements Listener {
 				// take 10x as must damage as you just took
 				event.setDamage(event.getDamage()*10);
 			}
+			if (FlashState.playersInFlashState.contains(p)) {
+				// take 10x as must damage as you just took
+				event.setDamage(event.getDamage()*5);
+			}
 		}
 	}
 
@@ -124,23 +128,33 @@ public class PlayerListener implements Listener {
 			//reuse same Location variable?
 			//first location grab is under flash
 			Location underFlash = new Location(event.getPlayer().getWorld(), event.getTo().getX(), event.getTo().getY()-1, event.getTo().getZ());
-			Block underBlock = underFlash.getBlock();
+			Block underBlock = underFlash.getBlock(); //change it to something you can walk on
 			if (underBlock.getType() == Material.WATER || underBlock.getType() == Material.STATIONARY_WATER)
 			{
-				event.getPlayer().sendMessage("freeze please");
 				underBlock.setType(Material.ICE);
 			}
-			double deltaX = event.getTo().getX() - event.getFrom().getX();
+			double deltaX = event.getTo().getX() - event.getFrom().getX(); //used for predictive stepping
 			double deltaZ = event.getTo().getZ() - event.getFrom().getZ();
-			
-			Location FrontFlashLoc = new Location(event.getPlayer().getWorld(), event.getTo().getX()+Math.signum(deltaX), event.getTo().getY(), event.getTo().getZ()+Math.signum(deltaZ));
+			Location FrontFlashLocDown = new Location(event.getPlayer().getWorld(), event.getTo().getX()+Math.signum(deltaX), event.getTo().getY()-1, event.getTo().getZ()+Math.signum(deltaZ));
+			underBlock = FrontFlashLocDown.getBlock();
+			if (underBlock.getType() == Material.WATER || underBlock.getType() == Material.STATIONARY_WATER)
+			{
+				underBlock.setType(Material.ICE);
+			}
+			Location FrontFlashLocDown2 = new Location(event.getPlayer().getWorld(), event.getTo().getX()+(2*Math.signum(deltaX)), event.getTo().getY()-1, event.getTo().getZ()+(2*Math.signum(deltaZ)));
+			underBlock = FrontFlashLocDown2.getBlock();
+			if (underBlock.getType() == Material.WATER || underBlock.getType() == Material.STATIONARY_WATER)
+			{
+				underBlock.setType(Material.ICE);
+			}
+			/*Location FrontFlashLoc = new Location(event.getPlayer().getWorld(), event.getTo().getX()+Math.signum(deltaX), event.getTo().getY(), event.getTo().getZ()+Math.signum(deltaZ));
 			//underBlock = event.getPlayer().getWorld().getBlockAt(FlashLoc);
 			Block newKidsOnTheBlock = FrontFlashLoc.getBlock();
 			newKidsOnTheBlock.breakNaturally();
 			Location FrontFlashLocUp = new Location(event.getPlayer().getWorld(), event.getTo().getX()+Math.signum(deltaX), event.getTo().getY()+1, event.getTo().getZ()+Math.signum(deltaZ));
 			//underBlock = event.getPlayer().getWorld().getBlockAt(FrontFlashLocUp);
 			Block upperBlock = FrontFlashLocUp.getBlock();
-			upperBlock.breakNaturally();
+			upperBlock.breakNaturally();*/
 			//if (event.getTo().get)
 
 		 //event.getPlayer().sendMessage("haha"); //debugging
