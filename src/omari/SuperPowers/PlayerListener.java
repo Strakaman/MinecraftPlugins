@@ -115,18 +115,25 @@ public class PlayerListener implements Listener {
 		if (FlashState.playersInFlashState.contains(event.getPlayer()))
 		 {	
 			//first check if you are above water, if so turn it into sand so you can theoretically run above it
-			//Location
-			Location underFlash = new Location(event.getPlayer().getWorld(), event.getTo().getX(), event.getTo().getY()-1, event.getTo().getZ());
-			Block underBlock = event.getPlayer().getWorld().getBlockAt(underFlash);
+			//reuse same Location variable?
+			//first location grab is under flash
+			Location FlashLoc = new Location(event.getPlayer().getWorld(), event.getTo().getX(), event.getTo().getY()-1, event.getTo().getZ());
+			Block underBlock = event.getPlayer().getWorld().getBlockAt(FlashLoc);
 			if (underBlock.getType() == Material.WATER)
 			{
 				underBlock.setType(Material.ICE);
 			}
-			
+			double deltaX = event.getTo().getX() - event.getFrom().getX();
+			double deltaZ = event.getTo().getZ() - event.getFrom().getZ();
+			FlashLoc = new Location(event.getPlayer().getWorld(), event.getTo().getX()+Math.signum(deltaX), event.getTo().getY(), event.getTo().getZ()+Math.signum(deltaZ));
+			underBlock = event.getPlayer().getWorld().getBlockAt(FlashLoc);
+			underBlock.breakNaturally();
+			FlashLoc = new Location(event.getPlayer().getWorld(), event.getTo().getX()+Math.signum(deltaX), event.getTo().getY()+1, event.getTo().getZ()+Math.signum(deltaZ));
+			underBlock = event.getPlayer().getWorld().getBlockAt(FlashLoc);
+			underBlock.breakNaturally();
 			//if (event.getTo().get)
-		 double deltaX = event.getTo().getX() - event.getFrom().getX();
-		 double deltaZ = event.getTo().getZ() - event.getFrom().getZ();
-		 event.getPlayer().sendMessage("haha");
+
+		 //event.getPlayer().sendMessage("haha"); //debugging
 		 }
 		}
 	}
