@@ -72,7 +72,8 @@ public class AvatarState extends JavaPlugin {
 		}
 		
 		if (command.getName().equalsIgnoreCase("fireBend")) {
-			fireBend(p);
+			fireBend(p, 10);
+			fireBend(p, 5);
 		}
 		
 		if (command.getName().equalsIgnoreCase("lavabend")) {
@@ -85,7 +86,7 @@ public class AvatarState extends JavaPlugin {
 		
 	}
 	
-	public static void fireBend(Player p) {
+	public static void fireBend(Player p, int length) {
 		Location loc = p.getLocation();
 		double james = loc.getX();
 		double morgan = loc.getZ();
@@ -93,31 +94,32 @@ public class AvatarState extends JavaPlugin {
 		loc.setY(ahmad);
 		Block bl = loc.getBlock();
 		
-		
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < length; i++) {
 			loc.setX(james+i);
+			loc.setZ(morgan + length -i);
+			bl = loc.getBlock();
+			bl.setType(Material.FIRE);
+		}
+		for (int i = 0; i < length; i++) {
+			loc.setX(james-i + length);
 			loc.setZ(morgan-i);
 			bl = loc.getBlock();
 			bl.setType(Material.FIRE);
 		}
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < length; i++) {
 			loc.setX(james-i);
-			loc.setZ(morgan-i);
+			loc.setZ(morgan+i-length);
 			bl = loc.getBlock();
-			bl.setType(Material.DIRT);
+			bl.setType(Material.FIRE);
 		}
-		for (int i = 0; i < 10; i++) {
-			loc.setX(james-i);
+		for (int i = 0; i < length; i++) {
+			loc.setX(james+i-length);
 			loc.setZ(morgan+i);
 			bl = loc.getBlock();
-			bl.setType(Material.DIRT);
+			bl.setType(Material.FIRE);
 		}
-		for (int i = 0; i < 10; i++) {
-			loc.setX(james+i);
-			loc.setZ(morgan+i);
-			bl = loc.getBlock();
-			bl.setType(Material.DIRT);
-		}
+		
+		p.getWorld().createExplosion(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), 4f, false, false);
 	}
 	
 	public static void computerDiamond(int length) {
@@ -156,6 +158,8 @@ public class AvatarState extends JavaPlugin {
 		Location loc = p.getLocation();
 		double initialY = loc.getY() - 1;
 		loc.setY(initialY);
+		Block bl = loc.getBlock();
+		bl.setType(Material.IRON_BLOCK);
 		loc.setX(loc.getX() + 1);
 		makeYBlocks(loc, 5, Material.IRON_BLOCK);
 		loc.setY(initialY);

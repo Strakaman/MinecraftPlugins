@@ -33,3 +33,5 @@ commands:
     description: revert the F@!& off.
   cerebro:
     description: everybody!
+  cat:
+    description: butts

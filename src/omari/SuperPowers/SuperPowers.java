@@ -43,7 +43,10 @@ public class SuperPowers extends JavaPlugin {
 			AvatarState.avatarOn(p);
 		}
 		AvatarState.commandAvatar(p, command);
-
+		
+		if (command.getName().equalsIgnoreCase("cat")) {
+			p.sendMessage("butts");
+		}
 		
 		if (command.getName().equalsIgnoreCase("flash")) {
 			//Player p = (Player) sender;

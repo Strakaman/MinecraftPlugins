@@ -24,11 +24,13 @@ public class PlayerListener implements Listener {
 										// main java plugin for some reason?
 	ArrayList<EntityDamageEvent.DamageCause> torchImmunity;
 	ArrayList<EntityDamageEvent.DamageCause> shazamImmunity;
+	ArrayList<EntityDamageEvent.DamageCause> avatarSwag;
 	
 	public PlayerListener(SuperPowers SP) {
 		powerLinkedToListener = SP;
 		torchImmunity = new ArrayList<EntityDamageEvent.DamageCause>();
 		shazamImmunity = new ArrayList<EntityDamageEvent.DamageCause>();
+		avatarSwag = new ArrayList<EntityDamageEvent.DamageCause>();
 		torchImmunity.add(EntityDamageEvent.DamageCause.FIRE);
 		torchImmunity.add(EntityDamageEvent.DamageCause.BLOCK_EXPLOSION);
 		torchImmunity.add(EntityDamageEvent.DamageCause.FIRE_TICK);
@@ -36,6 +38,10 @@ public class PlayerListener implements Listener {
 		torchImmunity.add(EntityDamageEvent.DamageCause.ENTITY_EXPLOSION);
 		shazamImmunity.add(EntityDamageEvent.DamageCause.STARVATION);
 		shazamImmunity.add(EntityDamageEvent.DamageCause.LIGHTNING);
+		avatarSwag.add(EntityDamageEvent.DamageCause.BLOCK_EXPLOSION);
+		avatarSwag.add(EntityDamageEvent.DamageCause.ENTITY_EXPLOSION);
+		avatarSwag.add(EntityDamageEvent.DamageCause.FALL);
+		avatarSwag.add(EntityDamageEvent.DamageCause.DROWNING);
 
 	}
 
@@ -166,6 +172,15 @@ public class PlayerListener implements Listener {
 				if (HumanTorch.playersInTorchState.contains(pp)) {
 					event.setCancelled(true); // should theoretically stop torch ppl from taking damage due to being on fire
 					pp.setFireTicks(pp.getFireTicks() + 1); // should theoretically allow them to be on fire indefinitely
+				}
+			}
+		}
+		
+		if (avatarSwag.contains(event.getCause())) {
+			if (event.getEntity() instanceof Player) {
+				Player pp = (Player) event.getEntity();
+				if (AvatarState.playersInAvatarState.contains(pp)) {
+					event.setCancelled(true); // should theoretically allow avatar to not drown, get hurt from explosions, and take fall damage
 				}
 			}
 		}
