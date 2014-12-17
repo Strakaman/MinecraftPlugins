@@ -27,15 +27,18 @@ public class Monta extends BukkitRunnable{
 	@Override
     public void run() {
 		int james = hateTheGame.getLocation().getBlockX();
-		int morgan = hateTheGame.getLocation().getBlockY();
+		int morgan = hateTheGame.getLocation().getBlockZ();
+		int ahmad = hateTheGame.getLocation().getBlockY();
 		Location loc = hateTheGame.getLocation();
-    	if (counter > 5) {
+    	if (counter > 100) {
     		this.cancel();
     	} else {
-    	
-    	hateTheGame.getWorld().dropItemNaturally(hateTheGame.getLocation(), new ItemStack(Material.BAKED_POTATO));
+    	loc.setX(james + randInt(1, 10));
+    	loc.setZ(morgan + randInt(1, 10));
+    	loc.setY(ahmad + 10);
+    	hateTheGame.getWorld().dropItemNaturally(loc, new ItemStack(Material.BAKED_POTATO));
     	counter++;
-    	scheduler.scheduleAsyncDelayedTask(mvp, this, 50);
+    	scheduler.scheduleAsyncDelayedTask(mvp, this, 5);
     	}
     }
 	
