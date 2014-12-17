@@ -52,6 +52,13 @@ public class PlayerListener implements Listener {
 		{
 			
 		}*/
+		if (HumanTorch.playersInTorchState.contains(event.getPlayer())) {
+			
+				Location pLoc = event.getPlayer().getLocation();
+				event.getPlayer().getWorld().createExplosion(pLoc.getX(), pLoc.getY(),
+						pLoc.getZ(), 3f, true, false);
+			}
+		
 	}
 
 	// called whenever a player left clicks
@@ -71,10 +78,12 @@ public class PlayerListener implements Listener {
 			}
 		}
 		if (ShazamState.playersInShazamState.contains(event.getPlayer())) {
-			if (event.getAction().equals(Action.RIGHT_CLICK_AIR)||event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 				event.getPlayer().getWorld().strikeLightning(event.getClickedBlock().getLocation());
 			}
-		}
+			}
+			
+		
 		if (event.getPlayer().getItemInHand().getType() == Material.FIREBALL) {
 			event.getPlayer().launchProjectile(Fireball.class);
 		}
@@ -96,6 +105,7 @@ public class PlayerListener implements Listener {
 	}
 
 	//called whenever the player moves
+	@EventHandler
 	public void playerMoved(PlayerMoveEvent event) {
 		if (HumanTorch.playersInTorchState.contains(event.getPlayer())){
 		Material m = event.getPlayer().getLocation().getBlock().getType();
