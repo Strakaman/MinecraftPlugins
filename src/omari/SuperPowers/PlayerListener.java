@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Fireball;
@@ -52,12 +53,7 @@ public class PlayerListener implements Listener {
 		{
 			
 		}*/
-		if (HumanTorch.playersInTorchState.contains(event.getPlayer())) {
-			
-				Location pLoc = event.getPlayer().getLocation();
-				event.getPlayer().getWorld().createExplosion(pLoc.getX(), pLoc.getY(),
-						pLoc.getZ(), 3f, true, false);
-			}
+		
 		
 	}
 
@@ -111,15 +107,23 @@ public class PlayerListener implements Listener {
 		Material m = event.getPlayer().getLocation().getBlock().getType();
 	    if (m == Material.STATIONARY_WATER || m == Material.WATER) {
 	        // player is in water
-	    	event.getPlayer().sendMessage("i should flame off here");
 	    	HumanTorch.flameOff(event.getPlayer()); //should depower you if you hit water
-	    	event.getPlayer().sendMessage("hmmm " + HumanTorch.playersInTorchState.contains(event.getPlayer()));
-	    }
+	      }
 		}
 		if (event.getFrom().getY() == event.getTo().getY())
 		{
 		if (FlashState.playersInFlashState.contains(event.getPlayer()))
 		 {	
+			//first check if you are above water, if so turn it into sand so you can theoretically run above it
+			//Location
+			Location underFlash = new Location(event.getPlayer().getWorld(), event.getTo().getX(), event.getTo().getY()-1, event.getTo().getZ());
+			Block underBlock = event.getPlayer().getWorld().getBlockAt(underFlash);
+			if (underBlock.getType() == Material.WATER)
+			{
+				underBlock.setType(Material.ICE);
+			}
+			
+			//if (event.getTo().get)
 		 double deltaX = event.getTo().getX() - event.getFrom().getX();
 		 double deltaZ = event.getTo().getZ() - event.getFrom().getZ();
 		 event.getPlayer().sendMessage("haha");
