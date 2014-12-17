@@ -106,11 +106,15 @@ public class PlayerListener implements Listener {
 	    	event.getPlayer().sendMessage("hmmm " + HumanTorch.playersInTorchState.contains(event.getPlayer()));
 	    }
 		}
+		if (event.getFrom().getY() == event.getTo().getY())
+		{
 		if (FlashState.playersInFlashState.contains(event.getPlayer()))
 		 {	
 		 double deltaX = event.getTo().getX() - event.getFrom().getX();
 		 double deltaZ = event.getTo().getZ() - event.getFrom().getZ();
+		 event.getPlayer().sendMessage("haha");
 		 }
+		}
 	}
 	
 	// called whenever the player dies
