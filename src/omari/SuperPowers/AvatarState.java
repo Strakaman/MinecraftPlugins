@@ -72,7 +72,7 @@ public class AvatarState extends JavaPlugin {
 		}
 		
 		if (command.getName().equalsIgnoreCase("fireBend")) {
-			//fireBend(p);
+			fireBend(p);
 		}
 		
 		if (command.getName().equalsIgnoreCase("lavabend")) {
@@ -86,7 +86,42 @@ public class AvatarState extends JavaPlugin {
 	}
 	
 	public static void fireBend(Player p) {
+		Location loc = p.getLocation();
+		double james = loc.getX();
+		double morgan = loc.getZ();
+		double ahmad = loc.getY();
+		loc.setY(ahmad);
+		Block bl = loc.getBlock();
 		
+		
+		for (int i = 0; i < 10; i++) {
+			loc.setX(james+i);
+			loc.setZ(morgan-i);
+			bl = loc.getBlock();
+			bl.setType(Material.FIRE);
+		}
+		for (int i = 0; i < 10; i++) {
+			loc.setX(james-i);
+			loc.setZ(morgan-i);
+			bl = loc.getBlock();
+			bl.setType(Material.DIRT);
+		}
+		for (int i = 0; i < 10; i++) {
+			loc.setX(james-i);
+			loc.setZ(morgan+i);
+			bl = loc.getBlock();
+			bl.setType(Material.DIRT);
+		}
+		for (int i = 0; i < 10; i++) {
+			loc.setX(james+i);
+			loc.setZ(morgan+i);
+			bl = loc.getBlock();
+			bl.setType(Material.DIRT);
+		}
+	}
+	
+	public static void computerDiamond(int length) {
+
 	}
 
 	public static void lavaBend(Player p) {
