@@ -117,20 +117,24 @@ public class PlayerListener implements Listener {
 			//first check if you are above water, if so turn it into sand so you can theoretically run above it
 			//reuse same Location variable?
 			//first location grab is under flash
-			Location FlashLoc = new Location(event.getPlayer().getWorld(), event.getTo().getX(), event.getTo().getY()-1, event.getTo().getZ());
-			Block underBlock = event.getPlayer().getWorld().getBlockAt(FlashLoc);
-			if (underBlock.getType() == Material.WATER)
+			Location underFlash = new Location(event.getPlayer().getWorld(), event.getTo().getX(), event.getTo().getY()-1, event.getTo().getZ());
+			Block underBlock = underFlash.getBlock();
+			if (underBlock.getType() == Material.WATER || underBlock.getType() == Material.STATIONARY_WATER)
 			{
+				event.getPlayer().sendMessage("freeze please");
 				underBlock.setType(Material.ICE);
 			}
 			double deltaX = event.getTo().getX() - event.getFrom().getX();
 			double deltaZ = event.getTo().getZ() - event.getFrom().getZ();
-			FlashLoc = new Location(event.getPlayer().getWorld(), event.getTo().getX()+Math.signum(deltaX), event.getTo().getY(), event.getTo().getZ()+Math.signum(deltaZ));
-			underBlock = event.getPlayer().getWorld().getBlockAt(FlashLoc);
-			underBlock.breakNaturally();
-			FlashLoc = new Location(event.getPlayer().getWorld(), event.getTo().getX()+Math.signum(deltaX), event.getTo().getY()+1, event.getTo().getZ()+Math.signum(deltaZ));
-			underBlock = event.getPlayer().getWorld().getBlockAt(FlashLoc);
-			underBlock.breakNaturally();
+			
+			Location FrontFlashLoc = new Location(event.getPlayer().getWorld(), event.getTo().getX()+Math.signum(deltaX), event.getTo().getY(), event.getTo().getZ()+Math.signum(deltaZ));
+			//underBlock = event.getPlayer().getWorld().getBlockAt(FlashLoc);
+			Block newKidsOnTheBlock = FrontFlashLoc.getBlock();
+			newKidsOnTheBlock.breakNaturally();
+			Location FrontFlashLocUp = new Location(event.getPlayer().getWorld(), event.getTo().getX()+Math.signum(deltaX), event.getTo().getY()+1, event.getTo().getZ()+Math.signum(deltaZ));
+			//underBlock = event.getPlayer().getWorld().getBlockAt(FrontFlashLocUp);
+			Block upperBlock = FrontFlashLocUp.getBlock();
+			upperBlock.breakNaturally();
 			//if (event.getTo().get)
 
 		 //event.getPlayer().sendMessage("haha"); //debugging
