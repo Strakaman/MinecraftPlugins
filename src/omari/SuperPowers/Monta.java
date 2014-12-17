@@ -40,7 +40,7 @@ public class Monta extends BukkitRunnable{
 		int morgan = hateTheGame.getLocation().getBlockZ();
 		int ahmad = hateTheGame.getLocation().getBlockY();
 		Location loc = hateTheGame.getLocation();
-    	if (counter > 100) {
+    	if (counter > 30) {
     		this.cancel();
     	} else {
     	loc.setX(james + randInt(-10, 10));
