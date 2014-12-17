@@ -11,7 +11,7 @@ public class FlashState {
 	{
 		if (turnOn)
 		{
-			p.setWalkSpeed(SuperPowers.defWalkSpeed*5);
+			p.setWalkSpeed(SuperPowers.defWalkSpeed*4);
 			if (!playersInFlashState.contains(p))
 	        {
 				playersInFlashState.add(p);

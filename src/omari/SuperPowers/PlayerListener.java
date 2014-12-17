@@ -135,6 +135,9 @@ public class PlayerListener implements Listener {
 			}
 			double deltaX = event.getTo().getX() - event.getFrom().getX(); //used for predictive stepping
 			double deltaZ = event.getTo().getZ() - event.getFrom().getZ();
+			event.getPlayer().sendMessage("Delta X: " + deltaX + " Delta Z: " + deltaZ);
+			if (Math.abs(deltaX) < 0.05f) {deltaX = 0;}
+			if (Math.abs(deltaZ) < 0.05f) {deltaZ = 0;}
 			Location FrontFlashLocDown = new Location(event.getPlayer().getWorld(), event.getTo().getX()+Math.signum(deltaX), event.getTo().getY()-1, event.getTo().getZ()+Math.signum(deltaZ));
 			underBlock = FrontFlashLocDown.getBlock();
 			if (underBlock.getType() == Material.WATER || underBlock.getType() == Material.STATIONARY_WATER)
@@ -147,14 +150,23 @@ public class PlayerListener implements Listener {
 			{
 				underBlock.setType(Material.ICE);
 			}
-			/*Location FrontFlashLoc = new Location(event.getPlayer().getWorld(), event.getTo().getX()+Math.signum(deltaX), event.getTo().getY(), event.getTo().getZ()+Math.signum(deltaZ));
+			if ((Math.abs(deltaX) > 0.8f) || (Math.abs(deltaZ) > 0.8f))
+			{
+				Location FrontFlashLocDown3 = new Location(event.getPlayer().getWorld(), event.getTo().getX()+(3*Math.signum(deltaX)), event.getTo().getY()-1, event.getTo().getZ()+(3*Math.signum(deltaZ)));
+				underBlock = FrontFlashLocDown3.getBlock();
+				if (underBlock.getType() == Material.WATER || underBlock.getType() == Material.STATIONARY_WATER)
+				{
+					underBlock.setType(Material.ICE);
+				}
+			}
+			Location FrontFlashLoc = new Location(event.getPlayer().getWorld(), event.getTo().getX()+Math.signum(deltaX), event.getTo().getY(), event.getTo().getZ()+Math.signum(deltaZ));
 			//underBlock = event.getPlayer().getWorld().getBlockAt(FlashLoc);
 			Block newKidsOnTheBlock = FrontFlashLoc.getBlock();
 			newKidsOnTheBlock.breakNaturally();
 			Location FrontFlashLocUp = new Location(event.getPlayer().getWorld(), event.getTo().getX()+Math.signum(deltaX), event.getTo().getY()+1, event.getTo().getZ()+Math.signum(deltaZ));
 			//underBlock = event.getPlayer().getWorld().getBlockAt(FrontFlashLocUp);
 			Block upperBlock = FrontFlashLocUp.getBlock();
-			upperBlock.breakNaturally();*/
+			upperBlock.breakNaturally();
 			//if (event.getTo().get)
 
 		 //event.getPlayer().sendMessage("haha"); //debugging
