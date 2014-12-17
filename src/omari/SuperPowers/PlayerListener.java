@@ -89,14 +89,8 @@ public class PlayerListener implements Listener {
 		if (damager instanceof Player) {
 			Player p = (Player) damager;
 			if (ShazamState.playersInShazamState.contains(p)) {
-				// take 3x as must damage as you just took
-				p.sendMessage("Should be doing more damage");
-				/*Damageable d = (Damageable) event.getEntity();
-				
-				d.damage(event.getDamage());
-				d.damage(event.getDamage());
-				d.damage(event.getDamage());*/
-				event.setDamage(event.getDamage()*4);
+				// take 10x as must damage as you just took
+				event.setDamage(event.getDamage()*10);
 			}
 		}
 	}
@@ -107,9 +101,16 @@ public class PlayerListener implements Listener {
 		Material m = event.getPlayer().getLocation().getBlock().getType();
 	    if (m == Material.STATIONARY_WATER || m == Material.WATER) {
 	        // player is in water
+	    	event.getPlayer().sendMessage("i should flame off here");
 	    	HumanTorch.flameOff(event.getPlayer()); //should depower you if you hit water
+	    	event.getPlayer().sendMessage("hmmm " + HumanTorch.playersInTorchState.contains(event.getPlayer()));
 	    }
 		}
+		if (FlashState.playersInFlashState.contains(event.getPlayer()))
+		 {	
+		 double deltaX = event.getTo().getX() - event.getFrom().getX();
+		 double deltaZ = event.getTo().getZ() - event.getFrom().getZ();
+		 }
 	}
 	
 	// called whenever the player dies

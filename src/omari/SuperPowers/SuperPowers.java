@@ -97,7 +97,9 @@ public class SuperPowers extends JavaPlugin {
 			{
 				if (playerPoweredUp(pro))
 				{
-					p.sendMessage(pro.getName() + ": was found at X: " + pro.getLocation().getX() + " Y: " + pro.getLocation().getY() + " Z: " + pro.getLocation().getZ());
+					//p.sendMessage(pro.getName() + ": was found at X: " + pro.getLocation().getX() + " Y: " + pro.getLocation().getY() + " Z: " + pro.getLocation().getZ());
+					String message = String.format(pro.getName() + ": was found at X: %.2f" + " Y: %.2f" + " Z: %.2f",pro.getLocation().getX(),pro.getLocation().getY(),pro.getLocation().getZ());
+					p.sendMessage(message);
 					pro.sendMessage(p.getName() + "has scanned for you. Beware....");
 				}
 			}
