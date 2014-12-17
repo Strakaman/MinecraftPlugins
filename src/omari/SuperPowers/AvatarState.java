@@ -218,14 +218,37 @@ public class AvatarState extends JavaPlugin {
 		Location loc = p.getLocation();
 		setInitialCoord(p);
 		resetCoord(loc);
-		earthPosZDomino(loc, 3, -2, 3, 0, 0, 2, p);
+		earthPosZDomino(loc, 3, -2, 3, 0, 0, 1, p);
 		resetCoord(loc);
-		earthPosZDomino(loc, 3, -2, -3, 0, 0, -2, p);
+		earthPosZDomino(loc, 3, -2, -3, 0, 0, -1, p);
 		resetCoord(loc);
-		earthPosXDomino(loc, 3, 3, -2, 0, 2, 0, p);
+		earthPosXDomino(loc, 3, 3, -2, 0, 1, 0, p);
 		resetCoord(loc);
-		earthPosXDomino(loc, 3, -3, -2, 0, -2, 0, p);
+		earthPosXDomino(loc, 3, -3, -2, 0, -1, 0, p);
 		p.getInventory().setItemInHand(new ItemStack(Material.DIRT,64));
+		earthPillar(p);
+	}
+	
+	public static void earthPillar(Player p) {
+		Location loc = p.getLocation();
+		double james = loc.getX();
+		double morgan = loc.getZ();
+		double ahmad = loc.getY();
+		loc.setY(ahmad-1);
+		Block bl = loc.getBlock();
+		for (int k = -2; k <= 2; k++){
+		loc.setZ(morgan+k);
+		for (int j = -2; j <= 2; j++) {
+		loc.setX(james+j);
+		for (int i = 0; i < p.getLocation().getY(); i++) {
+			loc.setY(ahmad-i);
+			bl = loc.getBlock();
+			if (bl.getType().equals(Material.AIR)) {
+				bl.setType(Material.DIRT);
+			}
+		}
+		}
+		}
 	}
 	
 	public static void earthPosZDomino(Location loc, double wallSize, double x, double z, double y, double xGap, double zGap, Player p) {
