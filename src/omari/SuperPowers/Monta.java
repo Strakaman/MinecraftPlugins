@@ -14,12 +14,22 @@ public class Monta extends BukkitRunnable{
 	SuperPowers mvp;
 	BukkitScheduler scheduler;
 	Player hateTheGame;
+	private static Material[] foodList;
+	
 	
 	public Monta(SuperPowers sp, Player p) {
 		// TODO Auto-generated constructor stub
 		mvp = sp;
 		scheduler = Bukkit.getServer().getScheduler();
 		hateTheGame = p;
+		foodList = new Material[7];
+		foodList[0] = Material.COOKED_BEEF;
+		foodList[1] = Material.COOKED_CHICKEN;
+		foodList[2] = Material.BAKED_POTATO;
+		foodList[3] = Material.BREAD;
+		foodList[4] = Material.COOKED_FISH;
+		foodList[5] = Material.EGG;
+		foodList[6] = Material.COOKIE;
 	}
 
 	int counter = 0;
@@ -33,10 +43,10 @@ public class Monta extends BukkitRunnable{
     	if (counter > 100) {
     		this.cancel();
     	} else {
-    	loc.setX(james + randInt(1, 10));
-    	loc.setZ(morgan + randInt(1, 10));
+    	loc.setX(james + randInt(-10, 10));
+    	loc.setZ(morgan + randInt(-10, 10));
     	loc.setY(ahmad + 10);
-    	hateTheGame.getWorld().dropItemNaturally(loc, new ItemStack(Material.BAKED_POTATO));
+    	hateTheGame.getWorld().dropItemNaturally(loc, new ItemStack(foodList[randInt(0, 6)]));
     	counter++;
     	scheduler.scheduleAsyncDelayedTask(mvp, this, 5);
     	}
